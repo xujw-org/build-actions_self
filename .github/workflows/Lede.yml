@@ -37,6 +37,14 @@ on:
           - 'xiaomi_redmi-router-ac2100'
           - 'xiaomi_redmi-router-ax6s'
           - 'xiaoyu_xy-c5'
+      RUNNER_TYPE:
+        description: '选择运行器类型'
+        required: true
+        default: 'ubuntu-22.04'
+        type: choice
+        options:
+          - 'ubuntu-22.04'
+          - 'self-hosted'
       INFORMATION_NOTICE:
         description: 'Telegram或pushplus信息通知'
         required: true
@@ -101,7 +109,7 @@ env:
 jobs:
   build:
     name: 启动"${{ matrix.target }}-${{ github.event.inputs.REPO_BRANCH }}"触发编译
-    runs-on: ubuntu-22.04
+    runs-on: ${{ github.event.inputs.RUNNER_TYPE }}
     if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
     
     env:
