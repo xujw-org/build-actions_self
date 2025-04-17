@@ -22,12 +22,11 @@ env:
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   TZ: Asia/Shanghai
-  RUNNER_TYPE: ${{ github.event.inputs.RUNNER_TYPE }}
 
 jobs:
   build:
     name: 编译 "${{matrix.target}}"
-    runs-on: ${{ env.RUNNER_TYPE }}
+    runs-on: ubuntu-22.04
     if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
     
     env:
